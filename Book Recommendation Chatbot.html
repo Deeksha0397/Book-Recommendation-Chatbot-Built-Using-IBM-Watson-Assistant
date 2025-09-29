@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Book Recommendation Chatbot</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #89f7fe, #66a6ff);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .container {
+      background: #fff;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      max-width: 600px;
+    }
+    h1 {
+      font-size: 2rem;
+      color: #333;
+      margin-bottom: 15px;
+    }
+    p {
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 20px;
+    }
+    .chat-btn {
+      background: #66a6ff;
+      color: #fff;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .chat-btn:hover {
+      background: #4b86e0;
+      transform: scale(1.05);
+    }
+  </style>
+  <script>
+   let watsonInstance; // store chatbot instance
+
+  window.watsonAssistantChatOptions = {
+    integrationID: "929a71c3-7bce-495b-a525-7c33f70ca481", // The ID of this integration.
+    region: "au-syd", // The region your integration is hosted in.
+    serviceInstanceID: "25694ddb-fad1-4124-b77a-de8ee352006d", // The ID of your service instance.
+    onLoad: async (instance) => {
+      watsonInstance = instance;
+      await instance.render(); // loads the chat widget
+    }
+  };
+
+  setTimeout(function(){
+    const t=document.createElement('script');
+    t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" +
+           (window.watsonAssistantChatOptions.clientVersion || 'latest') +
+           "/WatsonAssistantChatEntry.js";
+    document.head.appendChild(t);
+  });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>📚 Welcome to the Book Recommendation Chatbot</h1>
+    <p>Chat with our AI to discover your next favorite book!</p>
+    <button class="chat-btn" onclick="watsonInstance.openWindow()">💬 Start Chat</button>
+  </div>
+</body>
+</html>
